@@ -3,14 +3,14 @@ const API_BASE_URL = process.env.REACT_APP_SNYK_API_URL;
 const API_TOKEN = process.env.REACT_APP_SNYK_API_TOKEN;
 
 const headers = {
-  'Authorization': token ${API_TOKEN},
+  'Authorization':` token ${API_TOKEN}`,
   'Content-Type': 'application/json'
 };
 
 export const snykService = {
   async getProjectVulnerabilities(projectId) {
     try {
-      const response = await fetch(${API_BASE_URL}/project/${projectId}/issues, {
+      const response = await fetch(`${API_BASE_URL}/project/${projectId}/issues`, {
         headers
       });
       if (!response.ok) throw new Error('Failed to fetch vulnerabilities');
@@ -23,7 +23,7 @@ export const snykService = {
 
   async getDependencyGraph(projectId) {
     try {
-      const response = await fetch(${API_BASE_URL}/project/${projectId}/deps, {
+      const response = await fetch(`${API_BASE_URL}/project/${projectId}/deps`, {
         headers
       });
       if (!response.ok) throw new Error('Failed to fetch dependency graph');
@@ -36,7 +36,7 @@ export const snykService = {
 
   async testRepository(repoUrl) {
     try {
-      const response = await fetch(${API_BASE_URL}/test, {
+      const response = await fetch(`${API_BASE_URL}/test`, {
         method: 'POST',
         headers,
         body: JSON.stringify({ repository: repoUrl })

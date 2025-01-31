@@ -1,16 +1,16 @@
 // services/checkmarxService.js
 const API_BASE_URL = process.env.REACT_APP_CHECKMARX_API_URL;
-const API_KEY = process.env.REACT_APP_CHECKMARX_API_KEY;
+const API_KEY=process.env.REACT_APP_CHECKMARX_API_KEY;
 
 const headers = {
-  'Authorization': Bearer ${API_KEY},
+  'Authorization': `Bearer ${API_KEY}`,
   'Content-Type': 'application/json'
 };
 
 export const checkmarxService = {
   async createScan(projectId) {
     try {
-      const response = await fetch(${API_BASE_URL}/scans, {
+      const response = await fetch(`${API_BASE_URL}/scans`, { 
         method: 'POST',
         headers,
         body: JSON.stringify({ projectId })
@@ -25,7 +25,7 @@ export const checkmarxService = {
 
   async getScanResults(scanId) {
     try {
-      const response = await fetch(${API_BASE_URL}/scans/${scanId}/results, {
+      const response = await fetch(`${API_BASE_URL}/scans/${scanId}/results`, {  
         headers
       });
       if (!response.ok) throw new Error('Failed to fetch scan results');
@@ -38,7 +38,7 @@ export const checkmarxService = {
 
   async getProjectStats(projectId) {
     try {
-      const response = await fetch(${API_BASE_URL}/projects/${projectId}/statistics, {
+      const response = await fetch(`${API_BASE_URL}/projects/${projectId}/statistics`,{
         headers
       });
       if (!response.ok) throw new Error('Failed to fetch project statistics');
