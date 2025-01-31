@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from "../../ui/Card";
-import { Badge } from '@/components/ui/badge'
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
+// import { Badge } from '@/components/ui/badge'
 import { CheckCircle, XCircle, Clock } from 'lucide-react'
 
 const BuildStatus = () => {
@@ -51,11 +51,11 @@ const BuildStatus = () => {
       in_progress: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100'
     };
 
-    return (
-      <Badge className={`${styles[status]} px-2 py-1`}>
-        {status.replace('_', ' ').toUpperCase()}
-      </Badge>
-    );
+    // return (
+    //   <Badge className={`${styles[status]} px-2 py-1`}>
+    //     {status.replace('_', ' ').toUpperCase()}
+    //   </Badge>
+    // );
   };
 
   return (

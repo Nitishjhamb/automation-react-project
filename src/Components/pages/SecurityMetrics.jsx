@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from "../../ui/Card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { Shield, AlertTriangle, Lock } from 'lucide-react'
 
 const SecurityMetrics = () => {

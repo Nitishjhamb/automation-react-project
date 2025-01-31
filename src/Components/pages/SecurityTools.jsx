@@ -1,9 +1,9 @@
 import React from 'react';
-import GitGuardianCard from '../components/tools/GitGuardianCard';
-import ClairCard from '../components/tools/ClairCard';
-import SnykCard from '../components/tools/SnykCard';
-import CheckmarxCard from '../components/tools/CheckmarxCard';
-import TrivyCard from '../components/tools/TrivyCard';
+import GitGuardianCard from '../Components/tools/GitGuardianCard';
+import ClairCard from '../Components/tools/ClairCard';
+import SnykCard from '../Components/tools/SnykCard';
+import CheckmarxCard from '../Components/tools/CheckmarxCard';
+import TrivyCard from '../Components/tools/TrivyCard';
 
 const SecurityTools = () => {
   return (
