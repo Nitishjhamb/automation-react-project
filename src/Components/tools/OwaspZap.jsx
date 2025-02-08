@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertCircle, AlertTriangle, Bug, Shield } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
+import {AlertCircle, AlertTriangle, Bug, Shield } from 'lucide-react';
 
 const OwaspZapCard = ({ scanResults }) => {
     const [expandedAlert, setExpandedAlert] = useState(null);

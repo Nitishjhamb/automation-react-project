@@ -1,9 +1,9 @@
 // services/snykService.js
-const API_BASE_URL = process.env.REACT_APP_SNYK_API_URL;
-const API_TOKEN = process.env.REACT_APP_SNYK_API_TOKEN;
+const API_BASE_URL = import.meta.env.VITE_SNYK_API_URL;
+const API_TOKEN = import.meta.env.VITE_SNYK_API_TOKEN;
 
 const headers = {
-  'Authorization':` token ${API_TOKEN}`,
+  'Authorization': `token ${API_TOKEN}`,
   'Content-Type': 'application/json'
 };
 
