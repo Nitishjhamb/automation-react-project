@@ -14,7 +14,7 @@ const Navbar = ({ onMenuClick }) => {
               className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden"
               aria-label="Toggle menu"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
             </button>
             
             <span className="text-xl font-semibold text-gray-900 dark:text-white ml-2 lg:ml-0">
@@ -29,7 +29,7 @@ const Navbar = ({ onMenuClick }) => {
               aria-label="View notifications"
             >
               <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
-              <Bell className="h-5 w-5" />
+              <Bell className="h-5 w-5 text-gray-600 dark:text-gray-300" />
             </button>
 
             {/* Settings */}
@@ -37,7 +37,7 @@ const Navbar = ({ onMenuClick }) => {
               className="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
               aria-label="Open settings"
             >
-              <Settings className="h-5 w-5" />
+              <Settings className="h-5 w-5 text-gray-600 dark:text-gray-300" />
             </button>
 
             {/* Profile - Hidden on mobile */}
@@ -52,7 +52,7 @@ const Navbar = ({ onMenuClick }) => {
                   alt="User avatar"
                 />
                 <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  John Doe
+                  Security scanning
                 </span>
               </button>
             </div>
