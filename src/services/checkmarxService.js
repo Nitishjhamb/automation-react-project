@@ -1,6 +1,5 @@
-// services/checkmarxService.js
-const API_BASE_URL = process.env.REACT_APP_CHECKMARX_API_URL;
-const API_KEY=process.env.REACT_APP_CHECKMARX_API_KEY;
+const API_BASE_URL = import.meta.env.VITE_CHECKMARX_API_URL;
+const API_KEY = import.meta.env.VITE_CHECKMARX_API_KEY;
 
 const headers = {
   'Authorization': `Bearer ${API_KEY}`,
