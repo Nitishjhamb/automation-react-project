@@ -11,7 +11,7 @@ const Navbar = ({ onMenuClick }) => {
             {/* Menu button for mobile */}
             <button
               onClick={onMenuClick}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden"
+              className="p-2 rounded-md text-grey-600 dark:text-grey-300 hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden"
               aria-label="Toggle menu"
             >
               <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
@@ -25,19 +25,19 @@ const Navbar = ({ onMenuClick }) => {
           <div className="flex items-center space-x-4">
             {/* Notifications */}
             <button 
-              className="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              className="relative p-2 text-white-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
               aria-label="View notifications"
             >
               <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
-              <Bell className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+              <Bell className="h-5 w-5 text-white-600 dark:text-gray-300" />
             </button>
 
             {/* Settings */}
             <button 
-              className="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              className="p-2 text-white-600 dark:text-gray dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
               aria-label="Open settings"
             >
-              <Settings className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+              <Settings className="h-5 w-5 text-white-600 dark:text-gray dark:hover:bg-gray-300" />
             </button>
 
             {/* Profile - Hidden on mobile */}
@@ -51,7 +51,7 @@ const Navbar = ({ onMenuClick }) => {
                   src="https://api.dicebear.com/7.x/avataaars/svg?seed=John"
                   alt="User avatar"
                 />
-                <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <span className="ml-2 text-sm font-medium text-white-700 dark:text-white-300">
                   Security scanning
                 </span>
               </button>

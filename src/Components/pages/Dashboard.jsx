@@ -14,7 +14,7 @@ const Dashboard = () => {
         {/* Header with Theme Toggle */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Security Dashboard</h1>
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg"
           >
@@ -23,7 +23,7 @@ const Dashboard = () => {
             ) : (
               <Moon className="h-5 w-5 text-gray-700" />
             )}
-          </button>
+          </button> */}
         </div>
 
         {/* Build Status */}
