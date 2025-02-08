@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bug, AlertTriangle, RefreshCw, ArrowUpRight } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from "../../ui/Card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { snykService } from '../../services/snykService';
 
 const SnykCard = () => {

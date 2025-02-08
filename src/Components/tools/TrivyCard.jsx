@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "../../ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 import { AlertCircle, CheckCircle, Clock, Shield } from 'lucide-react';
 
 const TrivyCard = ({ vulnerability }) => {

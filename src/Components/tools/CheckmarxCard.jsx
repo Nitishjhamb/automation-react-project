@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, AlertTriangle, RefreshCw, Activity } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "../../ui/Card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { checkmarxService } from "../../services/checkmarxService";
 
 const CheckmarxCard = () => {
