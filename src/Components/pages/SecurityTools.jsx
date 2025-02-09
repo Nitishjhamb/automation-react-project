@@ -1,6 +1,6 @@
 import React from "react";
 import SnykCard from '../tools/SnykCard'
-import CheckmarxCard from "../tools/CheckmarxCard";
+import SonarqubeCard from "../tools/SonarqubeCard";
 import TrivyCard from "../tools/TrivyCard";
 import OwaspZapCard from "../tools/OwaspZap";
 
@@ -14,7 +14,7 @@ const SecurityTools = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SnykCard />
-          <CheckmarxCard />
+          <SonarqubeCard/>
           <TrivyCard />
           <OwaspZapCard/>
         </div>
