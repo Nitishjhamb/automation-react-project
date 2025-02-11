@@ -24,11 +24,13 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+        {/* Root container to take full height */}
+        <div className="flex h-screen w-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
           <Sidebar isOpen={isSidebarOpen} />
-          <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Content area fills remaining space */}
+          <div className="flex flex-col flex-grow overflow-hidden">
             <Navbar onMenuClick={toggleSidebar} />
-            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900">
+            <main className="flex-grow overflow-auto bg-gray-50 dark:bg-gray-900">
               <div className="container px-6 mx-auto">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
