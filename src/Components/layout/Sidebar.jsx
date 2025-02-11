@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -8,10 +8,17 @@ import {
   Container, 
   History,
   Settings,
-  HelpCircle
+  HelpCircle,
+  Moon,
+  Sun,
+  Bell,
+  Lock,
+  LogOut
 } from 'lucide-react';
 
 const Sidebar = () => {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   const navItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
     { name: 'Security Tools', icon: Shield, path: '/security-tools' },
@@ -22,13 +29,25 @@ const Sidebar = () => {
   ];
 
   const bottomNavItems = [
-    { name: 'Settings', icon: Settings, path: '/settings' },
+    { 
+      name: 'Settings', 
+      icon: Settings, 
+      onClick: () => setSettingsOpen(!settingsOpen) 
+    },
     { name: 'Help & Support', icon: HelpCircle, path: '/help' }
+  ];
+
+  const settingsOptions = [
+    { name: 'Dark Mode', icon: Moon, action: () => console.log('Toggle Dark Mode') },
+    { name: 'Enable Notifications', icon: Bell, action: () => console.log('Toggle Notifications') },
+    { name: 'Two-Factor Authentication', icon: Lock, action: () => console.log('Enable 2FA') },
+    { name: 'Logout', icon: LogOut, action: () => console.log('Logging Out') }
   ];
 
   const NavItem = ({ item }) => (
     <NavLink
       to={item.path}
+      onClick={item.onClick}
       className={({ isActive }) =>
         `flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
           isActive
@@ -65,6 +84,22 @@ const Sidebar = () => {
           {bottomNavItems.map((item) => (
             <NavItem key={item.name} item={item} />
           ))}
+
+          {/* Settings Menu (Collapsible) */}
+          {settingsOpen && (
+            <div className="mt-2 p-2 bg-gray-100 dark:bg-gray-900 rounded-lg space-y-2">
+              {settingsOptions.map((option) => (
+                <button
+                  key={option.name}
+                  onClick={option.action}
+                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg"
+                >
+                  <option.icon className="h-5 w-5 mr-3" />
+                  {option.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
