@@ -15,9 +15,12 @@ import {
   Lock,
   LogOut
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import ThemeToggle from '../toggle/ThemeToggle';
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const {isDarkMode, toggleTheme} = useTheme();
 
   const navItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
@@ -38,7 +41,6 @@ const Sidebar = () => {
   ];
 
   const settingsOptions = [
-    { name: 'Dark Mode', icon: Moon, action: () => console.log('Toggle Dark Mode') },
     { name: 'Enable Notifications', icon: Bell, action: () => console.log('Toggle Notifications') },
     { name: 'Two-Factor Authentication', icon: Lock, action: () => console.log('Enable 2FA') },
     { name: 'Logout', icon: LogOut, action: () => console.log('Logging Out') }
@@ -88,14 +90,15 @@ const Sidebar = () => {
           {/* Settings Menu (Collapsible) */}
           {settingsOpen && (
             <div className="mt-2 p-2 bg-gray-100 dark:bg-gray-900 rounded-lg space-y-2">
+              <ThemeToggle>Dark Mode</ThemeToggle>
               {settingsOptions.map((option) => (
                 <button
-                  key={option.name}
-                  onClick={option.action}
-                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg"
+                key={option.name}
+                onClick={option.action}
+                className={`text-white hover:bg-gray-700 flex items-center w-full px-4 py-2 text-sm dark:text-gray-300  dark:hover:bg-gray-800 rounded-lg ${option.name ==="Dark Mode"?"justify-center":""}`}
                 >
                   <option.icon className="h-5 w-5 mr-3" />
-                  {option.name}
+                {option.name}
                 </button>
               ))}
             </div>
