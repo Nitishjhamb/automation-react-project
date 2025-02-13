@@ -70,7 +70,7 @@ const Sidebar = () => {
         <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
           <Shield className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
           <span className="ml-2 text-lg font-semibold text-gray-900 dark:text-white">
-            SecureGuard
+            AVMV PLATFORM
           </span>
         </div>
 
