@@ -125,12 +125,12 @@ const Navbar = ({ onMenuClick }) => {
             </div>
 
             <div className="mt-4 flex justify-end">
-              <button
+              {/* <button
                 onClick={toggleSettings}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
                 Close
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
