@@ -44,7 +44,9 @@ const OwaspZapCard = ({ scanResults }) => {
     };
 
     return (
-        <Card className="w-full max-w-4xl shadow-lg">
+           <Card className="w-full max-w-4xl shadow-lg">
+        
+
             <CardHeader className="border-b">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -70,7 +72,7 @@ const OwaspZapCard = ({ scanResults }) => {
                         </div>
                     ))}
                 </div>
-
+                
                 {/* Alerts List */}
                 <div className="space-y-4">
                     {data.alerts.map((alert, index) => (
