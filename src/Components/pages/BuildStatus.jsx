@@ -50,12 +50,6 @@ const BuildStatus = () => {
       failed: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100',
       in_progress: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100'
     };
-
-    // return (
-    //   <Badge className={`${styles[status]} px-2 py-1`}>
-    //     {status.replace('_', ' ').toUpperCase()}
-    //   </Badge>
-    // );
   };
 
   return (

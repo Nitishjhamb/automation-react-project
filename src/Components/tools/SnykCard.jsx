@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Bug, AlertTriangle, RefreshCw, ArrowUpRight } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
-import { snykService } from '../../services/snykService';
+import { snykService } from '../../../backend/services/snykService';
 
 const SnykCard = () => {
   const [vulnerabilities, setVulnerabilities] = useState(null);
