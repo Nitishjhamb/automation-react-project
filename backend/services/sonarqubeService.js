@@ -1,7 +1,6 @@
 const SONARQUBE_API_BASE_URL = import.meta.env.VITE_SONARQUBE_API_URL || 'http://localhost:9000/api';
 
 export const sonarqubeService = {
-    // Fetch project metrics
     async getProjectMetrics(projectKey) {
         try {
             const response = await fetch(`${SONARQUBE_API_BASE_URL}/measures/component?component=${projectKey}&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density,security_hotspots`);
@@ -12,8 +11,6 @@ export const sonarqubeService = {
             throw error;
         }
     },
-
-    // Fetch quality gate status
     async getQualityGateStatus(projectKey) {
         try {
             const response = await fetch(`${SONARQUBE_API_BASE_URL}/qualitygates/project_status?projectKey=${projectKey}`);
@@ -24,8 +21,6 @@ export const sonarqubeService = {
             throw error;
         }
     },
-
-    // Fetch issues summary
     async getIssuesSummary(projectKey) {
         try {
             const response = await fetch(`${SONARQUBE_API_BASE_URL}/issues/search?componentKeys=${projectKey}&facets=severities`);
@@ -36,8 +31,6 @@ export const sonarqubeService = {
             throw error;
         }
     },
-
-    // Fetch code coverage history
     async getCoverageHistory(projectKey) {
         try {
             const response = await fetch(`${SONARQUBE_API_BASE_URL}/measures/search_history?component=${projectKey}&metrics=coverage`);

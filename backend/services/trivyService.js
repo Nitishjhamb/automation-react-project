@@ -1,5 +1,3 @@
-// trivyUtils.js
-
 export const mockTrivyData = {
   id: "CVE-2024-1234",
   severity: "CRITICAL",
@@ -62,7 +60,6 @@ export const mockMultipleVulnerabilities = [
   }
 ];
 
-// Helper function to process CVSS scores
 export const processCVSSScore = (score) => {
   return {
     value: score,
@@ -71,7 +68,6 @@ export const processCVSSScore = (score) => {
   };
 };
 
-// Get severity level based on CVSS score
 export const getCVSSSeverity = (score) => {
   if (score >= 9.0) return "CRITICAL";
   if (score >= 7.0) return "HIGH";
@@ -80,7 +76,6 @@ export const getCVSSSeverity = (score) => {
   return "NONE";
 };
 
-// Get color based on CVSS score
 export const getCVSSColor = (score) => {
   if (score >= 9.0) return "red";
   if (score >= 7.0) return "orange";
@@ -89,7 +84,6 @@ export const getCVSSColor = (score) => {
   return "gray";
 };
 
-// Format date to locale string
 export const formatDate = (dateString) => {
   if (dateString === "N/A") return dateString;
   try {
@@ -103,7 +97,6 @@ export const formatDate = (dateString) => {
   }
 };
 
-// Calculate vulnerability age in days
 export const getVulnerabilityAge = (publishedDate) => {
   if (publishedDate === "N/A") return null;
   try {
@@ -116,7 +109,6 @@ export const getVulnerabilityAge = (publishedDate) => {
   }
 };
 
-// Sort vulnerabilities by severity and CVSS score
 export const sortVulnerabilities = (vulnerabilities) => {
   const severityOrder = {
     CRITICAL: 4,
@@ -127,16 +119,12 @@ export const sortVulnerabilities = (vulnerabilities) => {
   };
 
   return [...vulnerabilities].sort((a, b) => {
-    // First sort by severity
     const severityDiff = severityOrder[b.severity] - severityOrder[a.severity];
     if (severityDiff !== 0) return severityDiff;
-    
-    // Then by CVSS score
     return b.cvss.score - a.cvss.score;
   });
 };
 
-// Group vulnerabilities by severity
 export const groupVulnerabilities = (vulnerabilities) => {
   return vulnerabilities.reduce((acc, vuln) => {
     const severity = vuln.severity.toUpperCase();
@@ -146,7 +134,6 @@ export const groupVulnerabilities = (vulnerabilities) => {
   }, {});
 };
 
-// Generate vulnerability statistics
 export const generateVulnerabilityStats = (vulnerabilities) => {
   const stats = {
     total: vulnerabilities.length,
