@@ -51,7 +51,7 @@ const PipelineGraph = ({ pipelineData }) => {
     };
 
     return (
-        <Card className="w-full max-w-4xl shadow-lg">
+        <Card className="w-full shadow-lg">
             <CardHeader className="border-b">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
