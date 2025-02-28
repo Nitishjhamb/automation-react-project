@@ -30,7 +30,7 @@ const SnykCard = () => {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-bold">Snyk</CardTitle>
-        <Bug className="h-6 w-6 text-purple-600" />
+        <Bug className="h-6 w-6 text-blue-600" />
       </CardHeader>
 
       <CardContent>
@@ -105,7 +105,7 @@ const SnykCard = () => {
               </button>
             </div>
           </div>
-        )}
+      )}
       </CardContent>
     </Card>
   );

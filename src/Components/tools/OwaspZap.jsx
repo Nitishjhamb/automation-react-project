@@ -64,15 +64,8 @@ const OwaspZapCard = ({ scanResults }) => {
         {/* Summary Section */}
         <div className="grid grid-cols-4 gap-4 mb-6">
           {Object.entries(data.summary).map(([severity, count]) => (
-            <div
-              key={severity}
-              className="text-center p-4 bg-gray-50 rounded-lg"
-            >
-              <p
-                className={`font-bold uppercase ${getSeverityColor(
-                  severity
-                )} mb-2`}
-              >
+            <div key={severity} className="text-center p-4 bg-gray-50 rounded-lg">
+              <p className={`font-bold uppercase ${getSeverityColor(severity)} mb-2`}>
                 {severity}
               </p>
               <p className="text-2xl font-bold">{count}</p>
@@ -87,9 +80,7 @@ const OwaspZapCard = ({ scanResults }) => {
             <div
               key={index}
               className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-              onClick={() =>
-                setExpandedAlert(expandedAlert === index ? null : index)
-              }
+              onClick={() => setExpandedAlert(expandedAlert === index ? null : index)}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -113,9 +104,7 @@ const OwaspZapCard = ({ scanResults }) => {
                   </div>
                   {alert.instances && (
                     <div>
-                      <p className="font-medium text-gray-700">
-                        Affected URLs:
-                      </p>
+                      <p className="font-medium text-gray-700">Affected URLs:</p>
                       <ul className="list-disc list-inside">
                         {alert.instances.map((instance, i) => (
                           <li key={i} className="text-blue-600 truncate">
