@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { AlertCircle, AlertTriangle, Bug, Shield } from "lucide-react";
-import {
-  processZapAlerts,
-  groupAlertsBySeverity,
-} from "../../../backend/services/owaspZapService";
+import {processZapAlerts, groupAlertsBySeverity} from "../../../backend/services/owaspZapService";
 
+// This is the component itself - unchanged
 const OwaspZapCard = ({ scanResults }) => {
+  // Component logic remains the same
   const [expandedAlert, setExpandedAlert] = useState(null);
 
   const defaultData = {
@@ -49,14 +48,16 @@ const OwaspZapCard = ({ scanResults }) => {
   };
 
   return (
-    <Card className="w-full max-w-4xl shadow-lg">
+    <Card className="col-span-3 w-full shadow-lg">
       <CardHeader className="border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="h-6 w-6 text-blue-600" />
             <CardTitle>OWASP ZAP Scan Results</CardTitle>
           </div>
-          <div className="text-sm text-gray-500">Scan ID: {data.scanId}</div>
+          <div className="text-sm text-gray-500">
+            Scan ID: {data.scanId}
+          </div>
         </div>
       </CardHeader>
 
@@ -137,3 +138,18 @@ const OwaspZapCard = ({ scanResults }) => {
 };
 
 export default OwaspZapCard;
+
+// Example of how this component should be rendered in the parent container
+/*
+// In your parent component, instead of:
+<div className="grid grid-cols-3 gap-4">
+  <OwaspZapCard scanResults={data} />
+  <div></div>  // Empty grid cell
+  <div></div>  // Empty grid cell
+</div>
+
+// Use this instead:
+<div className="w-full">
+  <OwaspZapCard scanResults={data} />
+</div>
+*/
