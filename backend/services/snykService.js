@@ -1,9 +1,17 @@
-const API_BASE_URL = import.meta.env.VITE_SNYK_API_URL;
-const API_TOKEN = import.meta.env.VITE_SNYK_API_TOKEN;
+const SNYK_API_BASE_URL = import.meta.env.VITE_SNYK_API_URL;
+const SNYK_API_TOKEN = import.meta.env.VITE_SNYK_API_TOKEN;
+const JENKINS_API_BASE_URL = import.meta.env.VITE_JENKINS_API_URL;
+const JENKINS_USER = import.meta.env.VITE_JENKINS_USER;
+const JENKINS_API_TOKEN = import.meta.env.VITE_JENKINS_API_TOKEN;
 
-const headers = {
-  'Authorization': `token ${API_TOKEN}`,
-  'Content-Type': 'application/json'
+const snykHeaders = {
+  "Authorization": `token ${SNYK_API_TOKEN}`,
+  "Content-Type": "application/json",
+};
+
+const jenkinsHeaders = {
+  "Authorization": `Basic ${btoa(`${JENKINS_USER}:${JENKINS_API_TOKEN}`)}`,
+  "Content-Type": "application/json",
 };
 
 export const snykService = {

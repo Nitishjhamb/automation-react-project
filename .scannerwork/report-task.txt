@@ -1,6 +1,6 @@
-projectKey=automation-react-project
+projectKey=quizapp
 serverUrl=http://localhost:9000
 serverVersion=25.2.0.102705
-dashboardUrl=http://localhost:9000/dashboard?id=automation-react-project
-ceTaskId=1ff77882-2e1e-4b21-b97b-af3f1c2193bc
-ceTaskUrl=http://localhost:9000/api/ce/task?id=1ff77882-2e1e-4b21-b97b-af3f1c2193bc
+dashboardUrl=http://localhost:9000/dashboard?id=quizapp
+ceTaskId=4bef99f7-36d3-427d-b293-e15f9c5c2437
+ceTaskUrl=http://localhost:9000/api/ce/task?id=4bef99f7-36d3-427d-b293-e15f9c5c2437
