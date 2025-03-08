@@ -1,50 +1,35 @@
-const API_BASE_URL = import.meta.env.VITE_SNYK_API_URL;
-const API_TOKEN = import.meta.env.VITE_SNYK_API_TOKEN;
+import axios from "axios";
 
-const headers = {
-  'Authorization': `token ${API_TOKEN}`,
-  'Content-Type': 'application/json'
-};
+const BASE_URL = "http://localhost:5000/api/snyk"; // Adjust as per your backend URL
 
 export const snykService = {
   async getProjectVulnerabilities(projectId) {
     try {
-      const response = await fetch(`${API_BASE_URL}/project/${projectId}/issues`, {
-        headers
-      });
-      if (!response.ok) throw new Error('Failed to fetch vulnerabilities');
-      return await response.json();
+      const response = await axios.get(`${BASE_URL}/project/${projectId}/issues`);
+      return response.data;
     } catch (error) {
-      console.error('Snyk API Error:', error);
+      console.error("Error fetching vulnerabilities:", error);
       throw error;
     }
   },
 
   async getDependencyGraph(projectId) {
     try {
-      const response = await fetch(`${API_BASE_URL}/project/${projectId}/deps`, {
-        headers
-      });
-      if (!response.ok) throw new Error('Failed to fetch dependency graph');
-      return await response.json();
+      const response = await axios.get(`${BASE_URL}/project/${projectId}/deps`);
+      return response.data;
     } catch (error) {
-      console.error('Snyk API Error:', error);
+      console.error("Error fetching dependency graph:", error);
       throw error;
     }
   },
 
-  async testRepository(repoUrl) {
+  async testRepository(repository) {
     try {
-      const response = await fetch(`${API_BASE_URL}/test`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ repository: repoUrl })
-      });
-      if (!response.ok) throw new Error('Failed to test repository');
-      return await response.json();
+      const response = await axios.post(`${BASE_URL}/test`, { repository });
+      return response.data;
     } catch (error) {
-      console.error('Snyk API Error:', error);
+      console.error("Error testing repository:", error);
       throw error;
     }
-  }
+  },
 };

@@ -3,15 +3,19 @@ import { Bug, AlertTriangle, RefreshCw, ArrowUpRight } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { snykService } from '../../../backend/services/snykService';
 
-const SnykCard = () => {
+const SnykCard = ({ projectId })  => {
   const [vulnerabilities, setVulnerabilities] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchVulnerabilities = async () => {
+    if (!projectId) {
+      console.error("Error: projectId is missing!");
+      return;
+    }
     try {
       setLoading(true);
-      const results = await snykService.getProjectVulnerabilities('main');
+      const results = await snykService.getProjectVulnerabilities(projectId); 
       setVulnerabilities(results);
       setError(null);
     } catch (err) {
@@ -23,8 +27,10 @@ const SnykCard = () => {
   };
 
   useEffect(() => {
-    fetchVulnerabilities();
-  }, []);
+    if (projectId) {
+      fetchVulnerabilities();
+    }
+  }, [projectId]);
 
   return (
     <Card>
@@ -50,13 +56,13 @@ const SnykCard = () => {
               <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                 <div className="text-sm text-gray-500 dark:text-gray-400">Dependencies Scanned</div>
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {vulnerabilities?.totalDependencies || 0}
+                  {vulnerabilities?.dependencyCount || 0}
                 </div>
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                 <div className="text-sm text-gray-500 dark:text-gray-400">Vulnerabilities Found</div>
                 <div className="text-2xl font-bold text-red-600">
-                  {vulnerabilities?.totalVulnerabilities || 0}
+                  {vulnerabilities?.issueCount || 0}
                 </div>
               </div>
             </div>
@@ -65,30 +71,26 @@ const SnykCard = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Latest Vulnerabilities</h3>
               <div className="space-y-2">
-                {vulnerabilities?.issues?.map((issue, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                  >
-                    <div className="flex items-center space-x-3">
+                {vulnerabilities?.issues?.length > 0 ? (
+                  vulnerabilities.issues.map((issue, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border">
                       <Bug className="h-5 w-5 text-purple-500" />
                       <div>
                         <div className="font-medium">{issue.package}</div>
                         <div className="text-sm text-gray-500">{issue.title}</div>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
                       <span className={`px-2 py-1 text-xs rounded-full ${
-                        issue.severity === 'High' ? 'bg-red-100 text-red-800' :
-                        issue.severity === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-blue-100 text-blue-800'
+                        issue.severity === "high" ? "bg-red-100 text-red-800" :
+                        issue.severity === "medium" ? "bg-yellow-100 text-yellow-800" :
+                        "bg-blue-100 text-blue-800"
                       }`}>
                         {issue.severity}
                       </span>
-                      <ArrowUpRight className="h-4 w-4 text-gray-400 cursor-pointer hover:text-gray-600" />
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-500 dark:text-gray-400">No vulnerabilities found.</p>
+                )}
               </div>
             </div>
 
@@ -105,7 +107,7 @@ const SnykCard = () => {
               </button>
             </div>
           </div>
-      )}
+        )}
       </CardContent>
     </Card>
   );

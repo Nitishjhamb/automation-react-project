@@ -1,7 +1,7 @@
-const trivyService = require("../services/trivyService");
+import * as trivyService from "../services/trivyService.js";
 
 // Fetch all vulnerabilities (mocked for now)
-const getVulnerabilities = async (req, res) => {
+export const getVulnerabilities = async (req, res) => {
     try {
         const vulnerabilities = await trivyService.mockMultipleVulnerabilities;
         res.status(200).json(vulnerabilities);
@@ -11,7 +11,7 @@ const getVulnerabilities = async (req, res) => {
 };
 
 // Fetch a single vulnerability by ID
-const getVulnerabilityById = async (req, res) => {
+export const getVulnerabilityById = async (req, res) => {
     try {
         const { id } = req.params;
         const vulnerability = trivyService.mockMultipleVulnerabilities.find(vuln => vuln.id === id);
@@ -27,7 +27,7 @@ const getVulnerabilityById = async (req, res) => {
 };
 
 // Get statistics for vulnerabilities
-const getVulnerabilityStats = async (req, res) => {
+export const getVulnerabilityStats = async (req, res) => {
     try {
         const stats = trivyService.generateVulnerabilityStats(trivyService.mockMultipleVulnerabilities);
         res.status(200).json(stats);
@@ -37,7 +37,7 @@ const getVulnerabilityStats = async (req, res) => {
 };
 
 // Get vulnerabilities grouped by severity
-const getVulnerabilitiesBySeverity = async (req, res) => {
+export const getVulnerabilitiesBySeverity = async (req, res) => {
     try {
         const groupedVulnerabilities = trivyService.groupVulnerabilities(trivyService.mockMultipleVulnerabilities);
         res.status(200).json(groupedVulnerabilities);
@@ -47,19 +47,11 @@ const getVulnerabilitiesBySeverity = async (req, res) => {
 };
 
 // Sort vulnerabilities by severity and CVSS score
-const getSortedVulnerabilities = async (req, res) => {
+export const getSortedVulnerabilities = async (req, res) => {
     try {
         const sortedVulnerabilities = trivyService.sortVulnerabilities(trivyService.mockMultipleVulnerabilities);
         res.status(200).json(sortedVulnerabilities);
     } catch (error) {
         res.status(500).json({ message: "Error sorting vulnerabilities", error: error.message });
     }
-};
-
-module.exports = {
-    getVulnerabilities,
-    getVulnerabilityById,
-    getVulnerabilityStats,
-    getVulnerabilitiesBySeverity,
-    getSortedVulnerabilities
 };

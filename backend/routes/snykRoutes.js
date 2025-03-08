@@ -1,12 +1,10 @@
-const express = require("express");
-const snykController = require("../controllers/snykController");
+import express from "express";
+import { getProjectVulnerabilities, getDependencyGraph, testRepository } from "../controllers/snykController.js";
 
 const router = express.Router();
 
-router.get("/snyk/project/:projectId/issues", snykController.getProjectVulnerabilities);
+router.get("/project/:projectId/issues", getProjectVulnerabilities);
+router.get("/project/:projectId/deps", getDependencyGraph);
+router.post("/test", testRepository);
 
-router.get("/snyk/project/:projectId/deps", snykController.getDependencyGraph);
-
-router.post("/snyk/test", snykController.testRepository);
-
-module.exports = router;
+export default router;

@@ -1,4 +1,7 @@
-const SONARQUBE_API_BASE_URL = import.meta.env.VITE_SONARQUBE_API_URL || 'http://localhost:9000/api';
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+const SONARQUBE_API_BASE_URL = import.meta.SONARQUBE_API_BASE_URL || 'http://localhost:9000/api';
 
 export const sonarqubeService = {
     async getProjectMetrics(projectKey) {

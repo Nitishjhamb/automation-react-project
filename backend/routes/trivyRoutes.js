@@ -1,11 +1,18 @@
-const express = require("express");
+import express from "express";
+import {
+    getVulnerabilities,
+    getVulnerabilityById,
+    getVulnerabilityStats,
+    getVulnerabilitiesBySeverity,
+    getSortedVulnerabilities
+} from "../controllers/trivyController.js";
+
 const router = express.Router();
-const trivyController = require("../controllers/trivyController");
 
-router.get("/vulnerabilities", trivyController.getVulnerabilities);
-router.get("/vulnerabilities/:id", trivyController.getVulnerabilityById);
-router.get("/vulnerabilities/stats", trivyController.getVulnerabilityStats);
-router.get("/vulnerabilities/grouped", trivyController.getVulnerabilitiesBySeverity);
-router.get("/vulnerabilities/sorted", trivyController.getSortedVulnerabilities);
+router.get("/vulnerabilities", getVulnerabilities);
+router.get("/vulnerabilities/:id", getVulnerabilityById);
+router.get("/vulnerabilities/stats", getVulnerabilityStats);
+router.get("/vulnerabilities/grouped", getVulnerabilitiesBySeverity);
+router.get("/vulnerabilities/sorted", getSortedVulnerabilities);
 
-module.exports = router;
+export default router;

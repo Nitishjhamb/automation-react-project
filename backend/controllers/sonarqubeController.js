@@ -1,4 +1,4 @@
-import { sonarqubeService } from "../services/sonarqubeService";
+import { sonarqubeService } from "../services/sonarqubeService.js";
 
 export const getProjectMetrics = async (req, res) => {
     try {
