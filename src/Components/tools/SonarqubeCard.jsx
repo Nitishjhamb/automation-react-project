@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
-import { Bug, Shield, Sparkles, Activity } from "lucide-react";
+import { Bug, Shield, Sparkles, Activity,Radar } from "lucide-react";
 import { sonarqubeService } from "../../../backend/services/sonarqubeService";
 
 const SonarqubeCard = ({ projectKey }) => {
@@ -35,13 +35,14 @@ const SonarqubeCard = ({ projectKey }) => {
 
   if (loading) {
     return (
-      <Card className="w-full shadow-lg">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-center h-40">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          </div>
-        </CardContent>
-      </Card>
+      <Card className="w-full shadow-lg bg-black">
+      <CardContent className="p-6">
+        <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-2xl font-bold text-white">SonarQube</CardTitle>
+          <Radar className="h-6 w-6 text-blue-600" />
+        </div>
+      </CardContent>
+    </Card>
     );
   }
 
