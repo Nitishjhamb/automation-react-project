@@ -60,11 +60,13 @@ export const mockMultipleVulnerabilities = [
   }
 ];
 
-export const processCVSSScore = (score) => ({
-  value: score,
-  severity: getCVSSSeverity(score),
-  color: getCVSSColor(score)
-});
+export const processCVSSScore = (score) => {
+  return {
+    value: score,
+    severity: getCVSSSeverity(score),
+    color: getCVSSColor(score)
+  };
+};
 
 export const getCVSSSeverity = (score) => {
   if (score >= 9.0) return "CRITICAL";
@@ -123,28 +125,59 @@ export const sortVulnerabilities = (vulnerabilities) => {
   });
 };
 
-export const groupVulnerabilities = (vulnerabilities) =>
-  vulnerabilities.reduce((acc, vuln) => {
+export const groupVulnerabilities = (vulnerabilities) => {
+  return vulnerabilities.reduce((acc, vuln) => {
     const severity = vuln.severity.toUpperCase();
     if (!acc[severity]) acc[severity] = [];
     acc[severity].push(vuln);
     return acc;
   }, {});
+};
 
 export const generateVulnerabilityStats = (vulnerabilities) => {
   const stats = {
     total: vulnerabilities.length,
-    bySeverity: { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, UNKNOWN: 0 },
+    bySeverity: {
+      CRITICAL: 0,
+      HIGH: 0,
+      MEDIUM: 0,
+      LOW: 0,
+      UNKNOWN: 0
+    },
     fixable: 0,
     averageCVSS: 0
   };
 
-  vulnerabilities.forEach((vuln) => {
+  vulnerabilities.forEach(vuln => {
+    // Count by severity
     stats.bySeverity[vuln.severity]++;
-    if (vuln.fixedVersion !== "N/A") stats.fixable++;
+    
+    // Count fixable vulnerabilities
+    if (vuln.fixedVersion !== "N/A") {
+      stats.fixable++;
+    }
+
+    // Sum CVSS scores
     stats.averageCVSS += vuln.cvss.score;
   });
 
-  stats.averageCVSS = stats.total > 0 ? (stats.averageCVSS / stats.total).toFixed(1) : 0;
+  // Calculate average CVSS score
+  stats.averageCVSS = stats.total > 0 
+    ? (stats.averageCVSS / stats.total).toFixed(1) 
+    : 0;
+
   return stats;
+};
+
+export default {
+  mockTrivyData,
+  mockMultipleVulnerabilities,
+  processCVSSScore,
+  getCVSSSeverity,
+  getCVSSColor,
+  formatDate,
+  getVulnerabilityAge,
+  sortVulnerabilities,
+  groupVulnerabilities,
+  generateVulnerabilityStats
 };

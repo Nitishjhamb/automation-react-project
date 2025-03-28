@@ -1,28 +1,22 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
+const express = require("express");
+const cors = require("cors");
+import dotenv from 'dotenv';
+
 dotenv.config();
 
-import snykRoutes from "./routes/snykRoutes.js";
-import sonarRoutes from "./routes/sonarqubeRoutes.js";
-import trivyRoutes from "./routes/trivyRoutes.js";
-
+const snykRoutes = require("./routes/snykRoutes");
+const sonarRoutes = require("./routes/sonarRoutes");
+const trivyRoutes = require("./routes/trivyRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: "GET, POST",
-    allowedHeaders: "Content-Type, Authorization",
-  })
-);
+app.use(cors());
 
-app.use("/api/snyk", snykRoutes);
-app.use("/api/sonarqube", sonarRoutes);
-app.use("/api/trivy", trivyRoutes);
+app.use("/snyk", snykRoutes);
+app.use("/sonarqube", sonarRoutes);
+app.use("/trivy", trivyRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
