@@ -1,24 +1,24 @@
-import React from 'react';
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
-import { AlertCircle, CheckCircle, Clock, Shield } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, Shield } from "lucide-react";
 
 const TrivyCard = ({ vulnerability }) => {
   // Default data structure if no vulnerability prop is passed
   const defaultVulnerability = {
-    id: 'N/A',
-    severity: 'UNKNOWN',
-    title: 'No vulnerability information',
-    packageName: 'N/A',
-    installedVersion: 'N/A',
-    fixedVersion: 'N/A',
-    description: 'No description available',
+    id: "N/A",
+    severity: "UNKNOWN",
+    title: "No vulnerability information",
+    packageName: "N/A",
+    installedVersion: "N/A",
+    fixedVersion: "N/A",
+    description: "No description available",
     references: [],
     cvss: {
       score: 0,
-      vector: 'N/A',
+      vector: "N/A",
     },
-    publishedDate: 'N/A',
-    lastModifiedDate: 'N/A',
+    publishedDate: "N/A",
+    lastModifiedDate: "N/A",
   };
 
   const data = vulnerability || defaultVulnerability;
@@ -26,11 +26,11 @@ const TrivyCard = ({ vulnerability }) => {
   // Function to determine severity badge color
   const getSeverityColor = (severity) => {
     const colors = {
-      CRITICAL: 'bg-red-500',
-      HIGH: 'bg-orange-500',
-      MEDIUM: 'bg-yellow-500',
-      LOW: 'bg-blue-500',
-      UNKNOWN: 'bg-gray-500',
+      CRITICAL: "bg-red-500",
+      HIGH: "bg-orange-500",
+      MEDIUM: "bg-yellow-500",
+      LOW: "bg-blue-500",
+      UNKNOWN: "bg-gray-500",
     };
     return colors[severity] || colors.UNKNOWN;
   };
@@ -63,7 +63,9 @@ const TrivyCard = ({ vulnerability }) => {
             <p className="font-medium">{data.packageName}</p>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500">Installed Version</p>
+            <p className="text-sm font-medium text-gray-500">
+              Installed Version
+            </p>
             <p className="font-medium">{data.installedVersion}</p>
           </div>
         </div>
@@ -85,7 +87,7 @@ const TrivyCard = ({ vulnerability }) => {
         {/* Fix Information */}
         <div className="border-t pt-4">
           <div className="flex items-center gap-2">
-            {data.fixedVersion !== 'N/A' ? (
+            {data.fixedVersion !== "N/A" ? (
               <>
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 <p>Fixed in version: {data.fixedVersion}</p>
