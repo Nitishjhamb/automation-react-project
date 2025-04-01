@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { AlertCircle, AlertTriangle, Bug, Shield } from "lucide-react";
-import {processZapAlerts, groupAlertsBySeverity} from "../../../backend/services/owaspZapService";
 
-// This is the component itself - unchanged
 const OwaspZapCard = ({ scanResults }) => {
-  // Component logic remains the same
   const [expandedAlert, setExpandedAlert] = useState(null);
 
   const defaultData = {
@@ -21,8 +18,6 @@ const OwaspZapCard = ({ scanResults }) => {
   };
 
   const data = scanResults || defaultData;
-  const processedAlerts = processZapAlerts(data.alerts);
-  const groupedAlerts = groupAlertsBySeverity(processedAlerts);
 
   const getSeverityIcon = (risk) => {
     switch (risk.toLowerCase()) {
@@ -55,9 +50,7 @@ const OwaspZapCard = ({ scanResults }) => {
             <Shield className="h-6 w-6 text-blue-600" />
             <CardTitle>OWASP ZAP Scan Results</CardTitle>
           </div>
-          <div className="text-sm text-gray-500">
-            Scan ID: {data.scanId}
-          </div>
+          <div className="text-sm text-gray-500">Scan ID: {data.scanId}</div>
         </div>
       </CardHeader>
 
@@ -66,9 +59,7 @@ const OwaspZapCard = ({ scanResults }) => {
         <div className="grid grid-cols-4 gap-4 mb-6">
           {Object.entries(data.summary).map(([severity, count]) => (
             <div key={severity} className="text-center p-4 bg-gray-50 rounded-lg">
-              <p className={`font-bold uppercase ${getSeverityColor(severity)} mb-2`}>
-                {severity}
-              </p>
+              <p className={`font-bold uppercase ${getSeverityColor(severity)} mb-2`}>{severity}</p>
               <p className="text-2xl font-bold">{count}</p>
               <p className="text-sm text-gray-500">Alerts</p>
             </div>
@@ -88,9 +79,7 @@ const OwaspZapCard = ({ scanResults }) => {
                   {getSeverityIcon(alert.risk)}
                   <h3 className="font-medium">{alert.name}</h3>
                 </div>
-                <p className={`font-bold ${getSeverityColor(alert.risk)}`}>
-                  {alert.risk}
-                </p>
+                <p className={`font-bold ${getSeverityColor(alert.risk)}`}>{alert.risk}</p>
               </div>
 
               {expandedAlert === index && (
@@ -108,9 +97,7 @@ const OwaspZapCard = ({ scanResults }) => {
                       <p className="font-medium text-gray-700">Affected URLs:</p>
                       <ul className="list-disc list-inside">
                         {alert.instances.map((instance, i) => (
-                          <li key={i} className="text-blue-600 truncate">
-                            {instance.url}
-                          </li>
+                          <li key={i} className="text-blue-600 truncate">{instance.url}</li>
                         ))}
                       </ul>
                     </div>
@@ -120,9 +107,7 @@ const OwaspZapCard = ({ scanResults }) => {
                       <p className="font-medium text-gray-700">References:</p>
                       <ul className="list-disc list-inside">
                         {alert.references.map((ref, i) => (
-                          <li key={i} className="text-blue-600 truncate">
-                            {ref}
-                          </li>
+                          <li key={i} className="text-blue-600 truncate">{ref}</li>
                         ))}
                       </ul>
                     </div>
@@ -138,18 +123,3 @@ const OwaspZapCard = ({ scanResults }) => {
 };
 
 export default OwaspZapCard;
-
-// Example of how this component should be rendered in the parent container
-/*
-// In your parent component, instead of:
-<div className="grid grid-cols-3 gap-4">
-  <OwaspZapCard scanResults={data} />
-  <div></div>  // Empty grid cell
-  <div></div>  // Empty grid cell
-</div>
-
-// Use this instead:
-<div className="w-full">
-  <OwaspZapCard scanResults={data} />
-</div>
-*/
