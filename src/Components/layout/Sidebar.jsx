@@ -26,7 +26,6 @@ const Sidebar = () => {
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
     { name: 'Security Tools', icon: Shield, path: '/security-tools' },
     { name: 'Dependencies', icon: Box, path: '/dependencies' },
-    // { name: 'Git Analysis', icon: GitBranch, path: '/git-analysis' },
     { name: 'Container Scan', icon: Container, path: '/container-scan' },
     { name: 'Scan History', icon: History, path: '/scan-history' }
   ];

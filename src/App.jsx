@@ -10,7 +10,7 @@ import Sidebar from "./Components/layout/Sidebar";
 import Dashboard from "./Components/pages/Dashboard";
 import SecurityTools from "./Components/pages/SecurityTools";
 import VulnerabilityChart from "./Components/pages/VulnerabilityChart";
-
+import DependenciesPage from "./Components/pages/dependenciesPage";
 // Context Providers
 import { ThemeProvider } from "./Components/context/ThemeContext";
 
@@ -39,6 +39,7 @@ function App() {
                     path="/vulnerability-chart"
                     element={<VulnerabilityChart />}
                   />
+                  <Route path="/dependencies" element={<DependenciesPage />} />
                 </Routes>
               </div>
             </main>
