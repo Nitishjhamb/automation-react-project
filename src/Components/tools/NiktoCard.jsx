@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
-import { AlertCircle, AlertTriangle, Bug, Shield } from "lucide-react";
+import { AlertCircle, AlertTriangle, Bug, Shield, Globe, Server } from "lucide-react";
 
-const OwaspZapCard = ({ scanResults }) => {
+const NiktoCard = ({ scanResults }) => {
   const [expandedAlert, setExpandedAlert] = useState(null);
 
   const defaultData = {
     scanId: "N/A",
     timestamp: new Date().toISOString(),
+    serverInfo: {
+      host: "Unknown",
+      ip: "N/A",
+      webServer: "N/A",
+      ssl: "N/A",
+    },
     alerts: [],
     summary: {
       high: 0,
@@ -15,6 +21,7 @@ const OwaspZapCard = ({ scanResults }) => {
       low: 0,
       informational: 0,
     },
+    headers: [],
   };
 
   const data = scanResults || defaultData;
@@ -47,20 +54,31 @@ const OwaspZapCard = ({ scanResults }) => {
       <CardHeader className="border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Shield className="h-6 w-6 text-blue-600" />
-            <CardTitle>OWASP ZAP Scan Results</CardTitle>
+            <Shield className="h-6 w-6 text-green-600" />
+            <CardTitle>Nikto Scan Results</CardTitle>
           </div>
-          <div className="text-sm text-gray-500">Scan ID: {data.scanId}</div>
+          <div className="text-sm text-gray-500 dark:text-white">Scan ID: {data.scanId}</div>
         </div>
       </CardHeader>
 
       <CardContent className="pt-6">
+        {/* Server Information */}
+        <div className="p-4 mb-6 dark:bg-gray-800 rounded-lg">
+          <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
+            <Server className="h-5 w-5 text-gray-600" /> Server Information
+          </h3>
+          <p className="text-sm text-gray-500 dark:text-white"><strong>Host:</strong> {data.serverInfo.host}</p>
+          <p className="text-sm text-gray-500 dark:text-white"><strong>IP:</strong> {data.serverInfo.ip}</p>
+          <p className="ttext-sm text-gray-500 dark:text-white"><strong>Web Server:</strong> {data.serverInfo.webServer}</p>
+          <p className="text-sm text-gray-500 dark:text-white"><strong>SSL Enabled:</strong> {data.serverInfo.ssl ? "Yes" : "No"}</p>
+        </div>
+
         {/* Summary Section */}
         <div className="grid grid-cols-4 gap-4 mb-6">
           {Object.entries(data.summary).map(([severity, count]) => (
             <div key={severity} className="text-center p-4 bg-gray-50 rounded-lg">
               <p className={`font-bold uppercase ${getSeverityColor(severity)} mb-2`}>{severity}</p>
-              <p className="text-2xl font-bold">{count}</p>
+              <p className="text-2xl font-bold dark:text-black">{count}</p>
               <p className="text-sm text-gray-500">Alerts</p>
             </div>
           ))}
@@ -92,16 +110,6 @@ const OwaspZapCard = ({ scanResults }) => {
                     <p className="font-medium text-gray-700">Solution:</p>
                     <p className="text-gray-600">{alert.solution}</p>
                   </div>
-                  {alert.instances && (
-                    <div>
-                      <p className="font-medium text-gray-700">Affected URLs:</p>
-                      <ul className="list-disc list-inside">
-                        {alert.instances.map((instance, i) => (
-                          <li key={i} className="text-blue-600 truncate">{instance.url}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                   {alert.references && (
                     <div>
                       <p className="font-medium text-gray-700">References:</p>
@@ -117,9 +125,25 @@ const OwaspZapCard = ({ scanResults }) => {
             </div>
           ))}
         </div>
+
+        {/* Security Headers Issues */}
+        {data.headers.length > 0 && (
+          <div className="mt-6">
+            <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+              <Globe className="h-5 w-5 text-gray-600" /> Security Headers Issues
+            </h3>
+            <ul className="list-disc list-inside bg-gray-50 p-4 rounded-lg">
+              {data.headers.map((header, index) => (
+                <li key={index} className="text-sm text-gray-700">
+                  <strong>{header.name}:</strong> {header.issue}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 };
 
-export default OwaspZapCard;
+export default NiktoCard;

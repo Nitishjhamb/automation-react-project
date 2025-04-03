@@ -2,7 +2,7 @@ import React from "react";
 import SnykCard from '../tools/SnykCard'
 import SonarqubeCard from "../tools/SonarqubeCard";
 import TrivyCard from "../tools/TrivyCard";
-import OwaspZapCard from "../tools/OwaspZap";
+import NiktoCard from "../tools/NiktoCard";
 
 const SecurityTools = () => {
   return (
@@ -18,7 +18,7 @@ const SecurityTools = () => {
           <SnykCard />
           <SonarqubeCard/>
           <TrivyCard />
-          <OwaspZapCard/>
+          <NiktoCard/>
         </div>
       </div>
     </div>

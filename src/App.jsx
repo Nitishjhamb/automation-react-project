@@ -11,6 +11,7 @@ import Dashboard from "./Components/pages/Dashboard";
 import SecurityTools from "./Components/pages/SecurityTools";
 import VulnerabilityChart from "./Components/pages/VulnerabilityChart";
 import DependenciesPage from "./Components/pages/dependenciesPage";
+import ReportsPage from "./Components/pages/ReportsPage";
 // Context Providers
 import { ThemeProvider } from "./Components/context/ThemeContext";
 
@@ -40,6 +41,7 @@ function App() {
                     element={<VulnerabilityChart />}
                   />
                   <Route path="/dependencies" element={<DependenciesPage />} />
+                  <Route path="/download-report" element={<ReportsPage/>}/>
                 </Routes>
               </div>
             </main>
