@@ -2,20 +2,32 @@ import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
 import { Download } from "lucide-react";
 
 const reports = [
-  { name: "Snyk Report", file: "snyk-report.json" },
-  { name: "Trivy Report", file: "trivy-report.json" },
-  { name: "SonarQube Report", file: "sonarqube-report.json" },
+  { name: "Snyk Report", file: "../../../client/public/snyk-report.json" },
+  { name: "Trivy Report", file: "../../../client/public/trivy-report.json" },
+  { name: "SonarQube Report", file: "../../../client/public/sonarqube-report.json" },
 ];
 
 const ReportPage = () => {
-  const handleDownload = (fileName) => {
-    const fileUrl = `${window.location.origin}/reports/${fileName}`;
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async (fileName) => {
+    try {
+      const response = await fetch(`/${fileName}`);
+      if (!response.ok) throw new Error("File not found");
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+    } catch (error) {
+      toast.error(`Failed to download: ${error.message}`);
+      console.error("Download error:", error);
+    }
   };
 
   return (
