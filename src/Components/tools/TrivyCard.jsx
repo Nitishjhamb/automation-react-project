@@ -39,7 +39,7 @@ const TrivyCard = () => {
       <CardContent>
         <div className="space-y-4">
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg flex flex-col justify-center items-center">
               <div className="text-sm text-gray-500 dark:text-gray-400 h-10 flex items-center">
                 Total Vulnerabilities
               </div>
@@ -48,7 +48,7 @@ const TrivyCard = () => {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg flex flex-col justify-center items-center">
               <div className="text-sm text-gray-500 dark:text-gray-400 h-10 flex items-center">
                 High Severity
               </div>
@@ -57,7 +57,7 @@ const TrivyCard = () => {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg flex flex-col justify-center items-center">
               <div className="text-sm text-gray-500 dark:text-gray-400 h-10 flex items-center">
                 Medium Severity
               </div>

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "../ui/Card";
-import { FileWarning, Clock, Bug, ShieldX, AlertTriangle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
+import { FileWarning } from "lucide-react";
 import sonarqubeData from "../../../client/public/sonarqube-report.json";
 
 const severityColors = {
-  BLOCKER: "text-red-600",
-  CRITICAL: "text-orange-500",
-  MAJOR: "text-yellow-500",
-  MINOR: "text-blue-400",
-  INFO: "text-gray-300",
+  BLOCKER: "bg-red-500 text-white",
+  CRITICAL: "bg-red-100 text-red-800",
+  MAJOR: "bg-yellow-100 text-yellow-800",
+  MINOR: "bg-blue-100 text-blue-800",
+  INFO: "bg-gray-100 text-gray-800",
+  BUG: "bg-pink-100 text-pink-800",
+  CODE_SMELL: "bg-purple-100 text-purple-800",
 };
 
 const SonarqubeCard = () => {
@@ -42,32 +44,67 @@ const SonarqubeCard = () => {
   });
 
   return (
-    <Card className="p-6 shadow-lg bg-[#1B1E26] rounded-2xl border border-[#2A2E38] text-white">
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-2xl font-bold">SonarQube</CardTitle>
+        <FileWarning className="h-6 w-6 text-red-600" />
+      </CardHeader>
+
       <CardContent>
-        <div className="flex items-center space-x-4">
-          <FileWarning className="text-red-500" size={26} />
-          <div>
-            <h2 className="text-lg font-semibold text-white">SonarQube Report</h2>
-            <p className="text-sm text-gray-400">Last Updated: {reportDate}</p>
-            <p className="text-sm text-blue-400">Project: {projectName}</p>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4 mt-5">
-          <div className="flex items-center space-x-2 bg-[#252A34] p-3 rounded-lg">
-            <Clock className="text-yellow-400" size={20} />
-            <span className="text-sm text-gray-300">Total Issues: {sonarqubeData.total}</span>
-          </div>
-          {Object.entries(issueCounts).map(([key, value]) => (
-            value > 0 && (
-              <div key={key} className="flex items-center space-x-2 bg-[#252A34] p-3 rounded-lg">
-                <AlertTriangle className={`${severityColors[key]}`} size={20} />
-                <span className="text-sm text-gray-300">
-                  {key} Issues: {value}
-                </span>
+        <div className="space-y-4">
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+              <div className="text-sm text-gray-500 dark:text-gray-400 h-10 flex items-center">
+                Total Issues
               </div>
-            )
-          ))}
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                {sonarqubeData.total}
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg col-span-2 flex flex-col items-center">
+              <div className="text-sm text-gray-500 dark:text-gray-400 h-10 flex items-center">
+                Project
+              </div>
+              <div className="text-lg font-medium text-blue-600 dark:text-blue-400 truncate">
+                {projectName}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                Last Updated: {reportDate}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2 text-left">
+              Issue Breakdown
+            </h3>
+            <div className="space-y-3">
+              {Object.entries(issueCounts).map(([key, value]) =>
+                value > 0 ? (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-left truncate text-gray-900 dark:text-white">
+                        {key}
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 ml-4">
+                      <span
+                        className={`px-2 py-1 text-xs rounded-full whitespace-nowrap ${
+                          severityColors[key] || severityColors.INFO
+                        }`}
+                      >
+                        {value}
+                      </span>
+                    </div>
+                  </div>
+                ) : null
+              )}
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
