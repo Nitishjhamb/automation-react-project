@@ -7,7 +7,8 @@ const Navbar = ({ onMenuClick }) => {
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false); // Added state
 
   const toggleSettings = () => setIsSettingsOpen(!isSettingsOpen);
-  const toggleNotifications = () => setIsNotificationsEnabled(!isNotificationsEnabled); // Toggle function
+  const toggleNotifications = () =>
+    setIsNotificationsEnabled(!isNotificationsEnabled); // Toggle function
 
   return (
     <>
@@ -23,10 +24,6 @@ const Navbar = ({ onMenuClick }) => {
               >
                 <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
               </button>
-
-              <span className="text-xl font-semibold text-gray-900 dark:text-white ml-2 lg:ml-0">
-                Security Dashboard
-              </span>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -40,7 +37,6 @@ const Navbar = ({ onMenuClick }) => {
                 )}
                 <Bell className="h-5 w-5 text-white dark:text-gray-300" />
               </button>
-              
 
               {/* Settings */}
               <button
@@ -52,7 +48,7 @@ const Navbar = ({ onMenuClick }) => {
               </button>
 
               {/* Profile - Hidden on mobile */}
-              <div className="hidden md:flex items-center">
+              {/* <div className="hidden md:flex items-center">
                 <button
                   className="flex hover:bg-gray-700 items-center space-x-2"
                   aria-label="Open profile menu"
@@ -66,7 +62,7 @@ const Navbar = ({ onMenuClick }) => {
                     Security scanning
                   </span>
                 </button>
-              </div>
+              </div> */}
 
               {/* Theme Toggle */}
               <ThemeToggle />
@@ -80,7 +76,9 @@ const Navbar = ({ onMenuClick }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
             <div className="flex justify-between items-center border-b pb-2">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Settings</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Settings
+              </h2>
               <button
                 onClick={toggleSettings}
                 className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
@@ -98,7 +96,9 @@ const Navbar = ({ onMenuClick }) => {
 
               {/* Notifications Toggle */}
               <div className="flex justify-between items-center">
-                <span className="text-gray-900 dark:text-white">Enable Notifications</span>
+                <span className="text-gray-900 dark:text-white">
+                  Enable Notifications
+                </span>
                 <input
                   type="checkbox"
                   checked={isNotificationsEnabled}
@@ -109,7 +109,9 @@ const Navbar = ({ onMenuClick }) => {
 
               {/* Security Option */}
               <div className="flex justify-between items-center">
-                <span className="text-gray-900 dark:text-white">Two-Factor Authentication</span>
+                <span className="text-gray-900 dark:text-white">
+                  Two-Factor Authentication
+                </span>
                 <button className="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                   Enable
                 </button>
@@ -117,7 +119,9 @@ const Navbar = ({ onMenuClick }) => {
 
               {/* Account Settings */}
               <div>
-                <h3 className="text-gray-900 dark:text-white font-semibold">Account</h3>
+                <h3 className="text-gray-900 dark:text-white font-semibold">
+                  Account
+                </h3>
                 <button className="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
                   Logout
                 </button>

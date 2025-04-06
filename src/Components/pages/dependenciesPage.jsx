@@ -34,8 +34,10 @@ const DependenciesPage = () => {
 
   return (
     <div className=" bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6">
-      <div className="flex justify-between items-center mb-10">
-        <h1 className="text-4xl font-bold">Dependencies</h1>
+      <div className="flex justify-center items-center mb-10">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Dependencies
+        </h1>
       </div>
 
       <div className="w-full max-w-6xl mx-auto space-y-8">
