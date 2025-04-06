@@ -1,34 +1,72 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/Card";
-import { Shield, AlertTriangle, Lock } from 'lucide-react'
+import { Shield, AlertTriangle, Lock } from 'lucide-react';
 
 const SecurityMetrics = () => {
-  const metrics = [
-    {
-      id: 1,
-      name: 'Security Score',
-      value: '85/100',
-      change: '+5',
-      icon: Shield,
-      color: 'text-green-500'
-    },
-    {
-      id: 2,
-      name: 'Open Vulnerabilities',
-      value: '12',
-      change: '-3',
-      icon: AlertTriangle,
-      color: 'text-yellow-500'
-    },
-    {
-      id: 3,
-      name: 'Dependencies Updated',
-      value: '98%',
-      change: '+2%',
-      icon: Lock,
-      color: 'text-blue-500'
-    }
-  ];
+  const [metrics, setMetrics] = useState([]);
+
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const sonarqubeData = await fetch('../../../client/public/sonarqube-report.json').then(res => res.json());
+        const trivyData = await fetch('../../../client/public/trivy-report.json').then(res => res.json());
+        const snykData = await fetch('../../../client/public/snyk-report.json').then(res => res.json());
+
+        const totalIssues = sonarqubeData.issues.length;
+        const securityScore = Math.max(0, 100 - (totalIssues * 2));
+
+        const vulnerabilities = trivyData.Results[0]?.Vulnerabilities || [];
+        const vulnCount = vulnerabilities.length;
+
+        // const vulnCount = trivyData.vulnerabilities?.length || 0;
+
+        const totalDependencies = snykData.dependencyCount;
+
+        // Combine metrics from all reports
+        const combinedMetrics = [
+          {
+            id: 1,
+            name: 'Security Score',
+            value: `${securityScore}/100`,
+            change: '+5',
+            icon: Shield,
+            color: 'text-green-500',
+            details: {
+              bugs: sonarqubeData.issues.filter(i => i.type === 'BUG').length,
+              vulnerabilities: sonarqubeData.issues.filter(i => i.type === 'VULNERABILITY').length,
+              codeSmells: sonarqubeData.issues.filter(i => i.type === 'CODE_SMELL').length
+            }
+          },
+          {
+            id: 2,
+            name: 'Open Vulnerabilities',
+            value: vulnCount,
+            change: '-3',
+            icon: AlertTriangle,
+            color: 'text-yellow-500',
+            details: {
+              critical: trivyData.vulnerabilities?.filter(v => v.severity === 'CRITICAL').length || 0,
+              high: trivyData.vulnerabilities?.filter(v => v.severity === 'HIGH').length || 0
+            }
+          },
+          {
+            id: 3,
+            name: 'Dependencies Updated',
+            value: totalDependencies,
+            change: '+2%',
+            icon: Lock,
+            color: 'text-blue-500',
+          }
+        ];
+
+        setMetrics(combinedMetrics);
+      } catch (error) {
+        console.error('Error fetching metrics:', error);
+      }
+    };
+
+    fetchMetrics();
+  }, []);
 
   return (
     <Card>
